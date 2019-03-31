@@ -1,0 +1,32 @@
+{
+  "name": "shuffle-lunch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^24.5.0",
+    "prettier": "^1.16.4",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
+  "scripts": {
+    "build": "webpack",
+    "test": "jest",
+    "prettier": "prettier --write \"**/*.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KtoZ/shuffle-lunch.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KtoZ/shuffle-lunch/issues"
+  },
+  "homepage": "https://github.com/KtoZ/shuffle-lunch#readme"
+}
