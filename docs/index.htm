@@ -9,11 +9,12 @@
 
 <body>
   <label for="members">メンバーを入力 (※カンマ区切り):</label>
-  <textarea id="members" rows="5" cols="33">User 1,User 2,User 3,User 4,User 5,User 6,User 7,User 8,User 9,User 10</textarea>
+  <textarea id="members" rows="5"
+    cols="33">User 1,User 2,User 3,User 4,User 5,User 6,User 7,User 8,User 9,User 10</textarea>
   <input type="button" id="shuffle" value="シャッフル" onclick="writeGroup();" />
   <p></p>
   <label for="results">シャッフル結果:</label>
-  <div id='results'></div>
+  <div id='results' class="row"></div>
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -21,25 +22,46 @@
   <script src="./src/index.js"></script>
 
   <script>
-function writeGroup(){
-  var results = document.querySelector('#results');
-  results.innerHTML = '';
+    function writeGroup() {
+      var results = document.querySelector('#results');
+      results.innerHTML = '';
 
-  let members = document.querySelector('#members').value.replace(/\r?\n/g, '').split(',');
-  let s = shuffle(members);
-  let group = getGroup(s);
+      let members = document.querySelector('#members').value.replace(/\r?\n/g, '').split(',');
+      let s = shuffle(members);
+      let group = getGroup(s);
+      console.log(group);
 
-  for(var i = 0; i < group.length; i++){
-    var ul = document.createElement('ul');
-    results.appendChild(ul);
+      for (var i = 0; i < group.length; i++) {
+        var col = document.createElement('div');
+        col.className = 'col s12 m6';
+        results.appendChild(col);
 
-    for(var j = 0; j < group[i].length; j++){
-      var li = document.createElement('li');
-      li.textContent = group[i][j];
-      ul.appendChild(li);
+        var ul = document.createElement('ul');
+        ul.className = 'collection with-header';
+        col.appendChild(ul);
+
+        var color = getColor();
+        var liHeader = document.createElement('li');
+        liHeader.className = 'collection-item lighten-4 ' + color;
+        ul.appendChild(liHeader);
+
+        var h4 = document.createElement('h4');
+        h4.textContent = 'Group ' + (i + 1);
+        liHeader.appendChild(h4);
+
+        for (var j = 0; j < group[i].length; j++) {
+          var li = document.createElement('li');
+          li.className = 'collection-item lighten-5 gray';
+          li.textContent = group[i][j];
+          ul.appendChild(li);
+        }
+      }
     }
-  }
-}
+
+    function getColor() {
+      const colors = ['red', 'pink', 'purple', 'blue', 'cyan', 'teal', 'green', 'yellow', 'amber', 'orange']
+      return shuffle(colors).shift();
+    }
   </script>
 </body>
 
