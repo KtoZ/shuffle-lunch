@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Shuffle lunch</title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+
+<body>
+  <label for="members">メンバーを入力 (※カンマ区切り):</label>
+  <textarea id="members" rows="5" cols="33">User 1,User 2,User 3,User 4,User 5,User 6,User 7,User 8,User 9,User 10</textarea>
+  <input type="button" id="shuffle" value="シャッフル" onclick="writeGroup();" />
+  <p></p>
+  <label for="results">シャッフル結果:</label>
+  <div id='results'></div>
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script src="./src/index.js"></script>
+
+  <script>
+function writeGroup(){
+  var results = document.querySelector('#results');
+  results.innerHTML = '';
+
+  let members = document.querySelector('#members').value.replace(/\r?\n/g, '').split(',');
+  let s = shuffle(members);
+  let group = getGroup(s);
+
+  for(var i = 0; i < group.length; i++){
+    var ul = document.createElement('ul');
+    results.appendChild(ul);
+
+    for(var j = 0; j < group[i].length; j++){
+      var li = document.createElement('li');
+      li.textContent = group[i][j];
+      ul.appendChild(li);
+    }
+  }
+}
+  </script>
+</body>
+
+</html>
