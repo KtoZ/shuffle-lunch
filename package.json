@@ -16,7 +16,7 @@
   "scripts": {
     "build": "webpack",
     "test": "jest",
-    "prettier": "prettier --write \"**/*.js\""
+    "prettier": "prettier --write \"src/*.js\""
   },
   "repository": {
     "type": "git",
