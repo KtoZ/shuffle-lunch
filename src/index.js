@@ -55,3 +55,58 @@ function getGroup(array) {
 
   return group;
 }
+
+function writeGroup() {
+  let results = document.querySelector("#results");
+  results.innerHTML = "";
+
+  let members = document
+    .querySelector("#members")
+    .value.replace(/\r?\n/g, "")
+    .split(",");
+  let s = shuffle(members);
+  let group = getGroup(s);
+  console.log(group);
+
+  for (var i = 0; i < group.length; i++) {
+    var col = document.createElement("div");
+    col.className = "col s12 m6";
+    results.appendChild(col);
+
+    var ul = document.createElement("ul");
+    ul.className = "collection with-header";
+    col.appendChild(ul);
+
+    var color = getColor();
+    var liHeader = document.createElement("li");
+    liHeader.className = "collection-item lighten-4 " + color;
+    ul.appendChild(liHeader);
+
+    var h4 = document.createElement("h4");
+    h4.textContent = "Group " + (i + 1);
+    liHeader.appendChild(h4);
+
+    for (var j = 0; j < group[i].length; j++) {
+      var li = document.createElement("li");
+      li.className = "collection-item lighten-5 gray";
+      li.textContent = group[i][j];
+      ul.appendChild(li);
+    }
+  }
+}
+
+function getColor() {
+  const colors = [
+    "red",
+    "pink",
+    "purple",
+    "blue",
+    "cyan",
+    "teal",
+    "green",
+    "yellow",
+    "amber",
+    "orange"
+  ];
+  return shuffle(colors).shift();
+}
