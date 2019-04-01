@@ -1,20 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 <head>
   <title>Shuffle lunch</title>
+
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
   <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
-  <label for="members">メンバーを入力 (※カンマ区切り):</label>
-  <textarea id="members" rows="5"
-    cols="33">User 1,User 2,User 3,User 4,User 5,User 6,User 7,User 8,User 9,User 10</textarea>
-  <input type="button" id="shuffle" value="シャッフル" onclick="writeGroup();" />
-  <p></p>
-  <label for="results">シャッフル結果:</label>
-  <div id='results' class="row"></div>
+  <div class="container">
+    <div class="row">
+      <div class="input-field col s12">
+        <h5>Members:</h5>
+        メンバーを入力 (※カンマ区切り):<textarea id="members"
+          class="materialize-textarea">User 1,User 2,User 3,User 4,User 5,User 6,User 7,User 8,User 9,User 10</textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <button id="shuffle" class="btn waves-effect waves-light" name="action" onclick="writeGroup();">
+          Shuffle
+          <i class="material-icons right">shuffle</i>
+        </button>
+      </div>
+    </div>
+    <div id="results" class="row"></div>
+  </div>
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -23,35 +41,38 @@
 
   <script>
     function writeGroup() {
-      var results = document.querySelector('#results');
-      results.innerHTML = '';
+      let results = document.querySelector("#results");
+      results.innerHTML = "";
 
-      let members = document.querySelector('#members').value.replace(/\r?\n/g, '').split(',');
+      let members = document
+        .querySelector("#members")
+        .value.replace(/\r?\n/g, "")
+        .split(",");
       let s = shuffle(members);
       let group = getGroup(s);
       console.log(group);
 
       for (var i = 0; i < group.length; i++) {
-        var col = document.createElement('div');
-        col.className = 'col s12 m6';
+        var col = document.createElement("div");
+        col.className = "col s12 m6";
         results.appendChild(col);
 
-        var ul = document.createElement('ul');
-        ul.className = 'collection with-header';
+        var ul = document.createElement("ul");
+        ul.className = "collection with-header";
         col.appendChild(ul);
 
         var color = getColor();
-        var liHeader = document.createElement('li');
-        liHeader.className = 'collection-item lighten-4 ' + color;
+        var liHeader = document.createElement("li");
+        liHeader.className = "collection-item lighten-4 " + color;
         ul.appendChild(liHeader);
 
-        var h4 = document.createElement('h4');
-        h4.textContent = 'Group ' + (i + 1);
+        var h4 = document.createElement("h4");
+        h4.textContent = "Group " + (i + 1);
         liHeader.appendChild(h4);
 
         for (var j = 0; j < group[i].length; j++) {
-          var li = document.createElement('li');
-          li.className = 'collection-item lighten-5 gray';
+          var li = document.createElement("li");
+          li.className = "collection-item lighten-5 gray";
           li.textContent = group[i][j];
           ul.appendChild(li);
         }
@@ -59,7 +80,18 @@
     }
 
     function getColor() {
-      const colors = ['red', 'pink', 'purple', 'blue', 'cyan', 'teal', 'green', 'yellow', 'amber', 'orange']
+      const colors = [
+        "red",
+        "pink",
+        "purple",
+        "blue",
+        "cyan",
+        "teal",
+        "green",
+        "yellow",
+        "amber",
+        "orange"
+      ];
       return shuffle(colors).shift();
     }
   </script>
