@@ -37,6 +37,7 @@ function shuffle() {
 
   let history = toHistory(group);
   addHistory(history);
+  dispHistory();
 }
 
 function shuffleArray(array) {
@@ -114,32 +115,50 @@ function getColor() {
 }
 
 function dispHistory() {
+  let tbody = document.querySelector("#log tbody");
+  tbody.innerHTML = "";
 
+  var log = getHistory();
+  log.forEach(logItem => {
+    let tr = document.createElement('tr');
+    tr.id = logItem.id;
+
+    let td1 = document.createElement('td');
+    td1.textContent = new Date(logItem.date).toLocaleDateString();
+    tr.appendChild(td1);
+
+    let td2 = document.createElement('td');
+    logItem.group.forEach(members => {
+      let p = document.createElement('p');
+      p.textContent = members;
+      td2.appendChild(p);
+    });
+    tr.appendChild(td2);
+
+    tbody.appendChild(tr);
+  });
+}
+
+function getHistory() {
+  let storage = localStorage.getItem('history');
+  return storage ? JSON.parse(storage) : [];
 }
 
 function addHistory(history) {
-  let storage = localStorage.getItem('history');
-  if (storage) {
-    let repo = JSON.parse(storage);
-    repo.unshift(history);
+  let repo = getHistory();
+  repo.unshift(history);
 
-    if (repo.length > 20) {
-      repo.pop();
-    }
+  if (repo.length > 20) {
+    repo.pop();
+  }
 
-    localStorage.setItem('history', JSON.stringify(repo));
-  }
-  else {
-    let repo = [];
-    repo.push(history);
-    localStorage.setItem('history', JSON.stringify(repo));
-  }
+  localStorage.setItem('history', JSON.stringify(repo));
 }
 
 function toHistory(groups) {
   let history = {
     id: generateUuid(),
-    date: Date.now(),
+    date: new Date(Date.now()).toJSON(),
     group: []
   };
 
