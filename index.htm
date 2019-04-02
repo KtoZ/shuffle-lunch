@@ -14,30 +14,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<body>
+<body class="grey lighten-4">
   <div class="container">
     <div class="row">
       <div class="input-field col s12">
-        <h5>Members:</h5>
+        <h5 class="deep-orange-text text-darken-2">Members</h5>
         メンバーを入力 (※カンマ区切り):<textarea id="members"
           class="materialize-textarea">User 1,User 2,User 3,User 4,User 5,User 6,User 7,User 8,User 9,User 10</textarea>
       </div>
     </div>
     <div class="row">
       <div class="col s12">
-        <button id="shuffle" class="btn waves-effect waves-light" name="action" onclick="writeGroup();">
+        <button id="shuffle" class="btn waves-effect waves-light" name="action">
           Shuffle
           <i class="material-icons right">shuffle</i>
         </button>
       </div>
     </div>
+
     <div id="results" class="row"></div>
-  </div>
 
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <div class="row">
+      <div class="col s12">
+        <h5 class="deep-orange-text text-darken-2">History</h5>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Group</th>
+            </tr>
+          </thead>
 
-  <script src="./src/index.js"></script>
+          <tbody>
+            <tr>
+              <td>2014-02-34
+              </td>
+              <td>
+                <p>JonathanJonath</p>
+                <p>bbbbb</p>
+                <p>44</p>
+              </td>
+            </tr>
+            <tr>
+              <td>Alan</td>
+              <td>Jellybean</td>
+            </tr>
+            <tr>
+              <td>Jonathan</td>
+              <td>Lollipop</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script src="./src/index.js"></script>
 </body>
 
 </html>
