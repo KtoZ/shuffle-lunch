@@ -140,7 +140,7 @@ function dispLog() {
 }
 
 function getLog() {
-  let storage = localStorage.getItem('log');
+  let storage = localStorage.getItem('sl#log');
   return storage ? JSON.parse(storage) : [];
 }
 
@@ -152,7 +152,7 @@ function addLog(logItem) {
     log.pop();
   }
 
-  localStorage.setItem('log', JSON.stringify(log));
+  localStorage.setItem('sl#log', JSON.stringify(log));
 }
 
 function toLogItem(groups) {
