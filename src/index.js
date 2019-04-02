@@ -35,9 +35,9 @@ function shuffle() {
     }
   }
 
-  let history = toHistory(group);
-  addHistory(history);
-  dispHistory();
+  let logItem = toLogItem(group);
+  addLog(logItem);
+  dispLog();
 }
 
 function shuffleArray(array) {
@@ -114,11 +114,11 @@ function getColor() {
   return shuffleArray(colors).shift();
 }
 
-function dispHistory() {
+function dispLog() {
   let tbody = document.querySelector("#log tbody");
   tbody.innerHTML = "";
 
-  var log = getHistory();
+  var log = getLog();
   log.forEach(logItem => {
     let tr = document.createElement('tr');
     tr.id = logItem.id;
@@ -139,34 +139,34 @@ function dispHistory() {
   });
 }
 
-function getHistory() {
-  let storage = localStorage.getItem('history');
+function getLog() {
+  let storage = localStorage.getItem('log');
   return storage ? JSON.parse(storage) : [];
 }
 
-function addHistory(history) {
-  let repo = getHistory();
-  repo.unshift(history);
+function addLog(logItem) {
+  let log = getLog();
+  log.unshift(logItem);
 
-  if (repo.length > 20) {
-    repo.pop();
+  if (log.length > 20) {
+    log.pop();
   }
 
-  localStorage.setItem('history', JSON.stringify(repo));
+  localStorage.setItem('log', JSON.stringify(log));
 }
 
-function toHistory(groups) {
-  let history = {
+function toLogItem(groups) {
+  let logItem = {
     id: generateUuid(),
     date: new Date(Date.now()).toJSON(),
     group: []
   };
 
   groups.forEach(group => {
-    history.group.push(group);
+    logItem.group.push(group);
   });
 
-  return history;
+  return logItem;
 }
 
 function generateUuid() {
@@ -189,4 +189,4 @@ function generateUuid() {
 
 // loaded
 document.querySelector("#shuffle").addEventListener('click', shuffle);
-window.addEventListener('load', dispHistory);
+window.addEventListener('load', dispLog);
