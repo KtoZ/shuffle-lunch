@@ -9,26 +9,28 @@ function shuffle() {
   let s = shuffleArray(members);
   let group = getGroup(s);
 
-  for (var i = 0; i < group.length; i++) {
-    var col = document.createElement("div");
+  for (let i = 0; i < group.length; i++) {
+    let col = document.createElement("div");
     col.className = "col s12 m6";
     results.appendChild(col);
 
-    var ul = document.createElement("ul");
+    let ul = document.createElement("ul");
     ul.className = "collection with-header";
     col.appendChild(ul);
 
-    var color = getColor();
-    var liHeader = document.createElement("li");
-    liHeader.className = `collection-item lighten-4 ${color}`;
+    let liHeader = document.createElement("li");
+    liHeader.className = "collection-item lighten-3 deep-orange";
     ul.appendChild(liHeader);
 
-    var h4 = document.createElement("h4");
-    h4.textContent = "Group " + (i + 1);
+    let h4 = document.createElement("h6");
+    let titleIcon = document.createElement("i");
+    titleIcon.className = "material-icons";
+    titleIcon.textContent = getRandomIcon();
+    h4.appendChild(titleIcon);
     liHeader.appendChild(h4);
 
-    for (var j = 0; j < group[i].length; j++) {
-      var li = document.createElement("li");
+    for (let j = 0; j < group[i].length; j++) {
+      let li = document.createElement("li");
       li.className = "collection-item lighten-5 gray";
       li.textContent = group[i][j];
       ul.appendChild(li);
@@ -98,20 +100,27 @@ function getGroup(array) {
   return group;
 }
 
-function getColor() {
-  const colors = [
-    "red",
-    "pink",
-    "purple",
-    "blue",
-    "cyan",
-    "teal",
-    "green",
-    "yellow",
-    "amber",
-    "orange"
+function getRandomIcon() {
+  const icons = [
+    "local_bar",
+    "local_cafe",
+    "local_dining",
+    "local_drink",
+    "local_pizza",
+    "restaurant",
+    "restaurant_menu",
+    "airplanemode_active",
+    "alarm",
+    "beach_access",
+    "brightness_2",
+    "bubble_chart",
+    "cloud_queue",
+    "directions_bike",
+    "fitness_center",
+    "headset",
+    "pets"
   ];
-  return shuffleArray(colors).shift();
+  return shuffleArray(icons).shift();
 }
 
 function dispLog() {
