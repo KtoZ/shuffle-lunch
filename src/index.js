@@ -192,6 +192,10 @@ function removeLog(id) {
   tr.remove();
 }
 
+function removeLogAll() {
+  localStorage.removeItem("sl#log");
+}
+
 function toLogItem(groups) {
   let logItem = {
     id: generateUuid(),
@@ -225,4 +229,8 @@ function generateUuid() {
 
 // loaded
 document.querySelector("#shuffle").addEventListener("click", shuffle);
+document.querySelector("#logRemoveAll").addEventListener("click", () => {
+  removeLogAll();
+  dispLog();
+});
 window.addEventListener("load", dispLog);
