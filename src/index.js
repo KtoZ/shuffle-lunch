@@ -19,7 +19,7 @@ function shuffle() {
     col.appendChild(ul);
 
     let liHeader = document.createElement("li");
-    liHeader.className = "collection-item lighten-3 deep-orange";
+    liHeader.className = "collection-item lighten-2 orange";
     ul.appendChild(liHeader);
 
     let h4 = document.createElement("h6");
