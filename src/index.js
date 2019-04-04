@@ -120,27 +120,46 @@ function dispLog() {
 
   var log = getLog();
   log.forEach(logItem => {
-    let tr = document.createElement('tr');
+    let tr = document.createElement("tr");
     tr.id = logItem.id;
 
-    let td1 = document.createElement('td');
+    let td1 = document.createElement("td");
     td1.textContent = new Date(logItem.date).toLocaleDateString();
     tr.appendChild(td1);
 
-    let td2 = document.createElement('td');
+    let td2 = document.createElement("td");
     logItem.group.forEach(members => {
-      let p = document.createElement('p');
+      let p = document.createElement("p");
       p.textContent = members;
       td2.appendChild(p);
     });
     tr.appendChild(td2);
 
+    let td3 = document.createElement("td");
+    td3.className = "center";
+    let removeIcon = createRemoveIcon(logItem.id);
+    td3.appendChild(removeIcon);
+    tr.appendChild(td3);
+
     tbody.appendChild(tr);
   });
 }
 
+function createRemoveIcon(id) {
+  let div = document.createElement("div");
+  div.className = "waves-effect";
+
+  let i = document.createElement("i");
+  i.className = "material-icons";
+  i.textContent = "delete";
+  i.onclick = () => removeLog(id);
+  div.appendChild(i);
+
+  return div;
+}
+
 function getLog() {
-  let storage = localStorage.getItem('sl#log');
+  let storage = localStorage.getItem("sl#log");
   return storage ? JSON.parse(storage) : [];
 }
 
@@ -152,7 +171,16 @@ function addLog(logItem) {
     log.pop();
   }
 
-  localStorage.setItem('sl#log', JSON.stringify(log));
+  localStorage.setItem("sl#log", JSON.stringify(log));
+}
+
+function removeLog(id) {
+  let log = getLog();
+  log = log.filter(r => r.id != id);
+  localStorage.setItem("sl#log", JSON.stringify(log));
+
+  let tr = document.querySelector(`#${id}`);
+  tr.remove();
 }
 
 function toLogItem(groups) {
@@ -171,8 +199,8 @@ function toLogItem(groups) {
 
 function generateUuid() {
   // https://github.com/GoogleChrome/chrome-platform-analytics/blob/master/src/internal/identifier.js
-  // const FORMAT: string = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
-  let chars = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("");
+  // const FORMAT: string = "IDxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
+  let chars = "IDxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("");
   for (let i = 0, len = chars.length; i < len; i++) {
     switch (chars[i]) {
       case "x":
@@ -186,7 +214,6 @@ function generateUuid() {
   return chars.join("");
 }
 
-
 // loaded
-document.querySelector("#shuffle").addEventListener('click', shuffle);
-window.addEventListener('load', dispLog);
+document.querySelector("#shuffle").addEventListener("click", shuffle);
+window.addEventListener("load", dispLog);
